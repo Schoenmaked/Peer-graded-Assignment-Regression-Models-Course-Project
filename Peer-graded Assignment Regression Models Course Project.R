@@ -1,0 +1,82 @@
+
+
+
+#Loading
+
+library(ggplot2)
+
+# 2. some exploratory data analyses?
+
+data(mtcars)
+head(mtcars, n=3)
+dim(mtcars)
+
+# 1. interpret the coefficients correctly?
+
+#convert categorical variables to factors 
+mtcars$cyl <- as.factor(mtcars$cyl)
+mtcars$vs <- as.factor(mtcars$vs)
+mtcars$am <- factor(mtcars$am)
+mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb)
+attach(mtcars)
+
+# 2. fit multiple models and detail their strategy for model selection?
+
+# Statistical Inference
+
+testResults <- t.test(mpg ~ am)
+testResults$p.value
+
+# The T-Test 
+
+testResults$estimate
+
+
+# Regression Analysis
+
+fullModelFit <- lm(mpg ~ ., data = mtcars)
+summary(fullModelFit)  # results hidden
+summary(fullModelFit)$coeff  # results hidden
+
+
+stepFit <- step(fullModelFit)
+summary(stepFit) # results hidden
+summary(stepFit)$coeff # results hidden
+
+
+sum((abs(dfbetas(stepFit)))>1)
+
+residual plot and some diagnostics
+
+# 5. boxplot(mpg ~ am, 
+xlab="Transmission Type (0 = Automatic, 1 = Manual)", 
+ylab="MPG",
+main="MPG by Transmission Type")
+
+
+par(mfrow = c(2, 2))
+plot(stepFit)
+
+# 4. answer the questions of interest or detai?
+
+#"Is an automatic or manual transmission better for MPG?
+# It seems that the MPG transmission is better by 30%. The difference is around 7.24
+
+# Quantify the MPG difference between automatic and manual transmission? 
+# A Manual transmission improves the MPG by 1.81.
+
+# 8.Did the report include an executive summary?
+
+# Summary 
+#The Motor Trend is a magazine about the automobile industry.
+#Looking at a data set of a collection of cars, they are interested 
+#in exploring the relationship between a set of variables and miles per 
+#gallon (MPG) (outcome). They are particularly interested in the following two questions:
+# Is an automatic or manual transmission better for MPG"?
+# Answer: It seems that the MPG transmission is better by 30%. The difference is around 7.24
+# Quantify the MPG difference between automatic and manual transmissions?
+# Answer: A Manual transmission improves the MPG by 1.81.Pr(>|t|) 2.064597e-01
+# to answer these questions a The T-Test and a Regression Analysis was performed.
+
+
