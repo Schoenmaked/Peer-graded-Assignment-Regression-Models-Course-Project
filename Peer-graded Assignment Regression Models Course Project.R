@@ -47,9 +47,9 @@ summary(stepFit)$coeff # results hidden
 
 sum((abs(dfbetas(stepFit)))>1)
 
-residual plot and some diagnostics
+# 5. residual plot and some diagnostics
 
-# 5. boxplot(mpg ~ am, 
+boxplot(mpg ~ am, 
 xlab="Transmission Type (0 = Automatic, 1 = Manual)", 
 ylab="MPG",
 main="MPG by Transmission Type")
